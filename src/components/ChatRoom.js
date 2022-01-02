@@ -4,7 +4,8 @@ import firebase from 'firebase';
 import { auth } from '../firebase';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import ChatMessage from './ChatMessage';
-import {db} from '../firebase'
+import {db} from '../firebase';
+import { useEffect } from 'react';
 
 const firestore=db;
 
@@ -13,7 +14,7 @@ const firestore=db;
 export default function ChatRoom() {
     const dummy =  useRef();
     const messagesRef = firestore.collection('messages');
-    const query = messagesRef.orderBy('createdAt').limit(50);
+    const query = messagesRef.orderBy('createdAt').limit(100);
   
     const [messages] = useCollectionData(query, { idField: 'id' });
   
@@ -33,8 +34,13 @@ export default function ChatRoom() {
       })
   
       setFormValue('');
-      dummy.current.scrollIntoView({ behavior: 'smooth' });
+      
     }
+
+    useEffect(() => {
+      dummy.current.scrollIntoView({ block: 'start' });
+      
+    }, [messages])
   
     return (<>
       <main>
