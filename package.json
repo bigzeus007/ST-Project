@@ -1,5 +1,6 @@
 {
-  "name": "react-chat",
+  "homepage": "https://bigzeus007.github.io/ST-Project",
+  "name": "ST-Project",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
